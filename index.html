@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수행평가 및 일정 공지</title>
+<style>
+/* CSS 스타일링 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.announcement {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 이미지의 높이를 고정하는 CSS */
+.image-container {
+    text-align: center;
+    margin-top: 20px;
+    height: 400px; /* 이미지의 높이를 원하는 값으로 고정 */
+    overflow: hidden; /* 이미지가 컨테이너를 넘어갈 경우를 대비하여 오버플로우 제어 */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: 100%; /* 이미지의 높이를 컨테이너의 높이에 맞게 조정 */
+    object-fit: cover; /* 이미지가 비율을 유지하면서 컨테이너에 가득 차도록 설정 */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: zoomIn 1s ease-out;
+}
+
+.image-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.notice-board {
+    padding: 20px;
+    animation: slideInUp 1s ease-out;
+}
+
+.notice-board h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.notice-board ul {
+    list-style: none;
+    padding: 0;
+}
+
+.notice-board li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    animation: fadeInUp 1s ease-out;
+}
+
+.notice-board li:last-child {
+    border-bottom: none;
+}
+
+.notice-board p {
+    margin: 5px 0;
+    color: #666;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #0056b3;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>수행평가 및 일정 공지</h1>
+    </div>
+
+    <div class="announcement" id="announcement">
+        <!-- 공지사항은 JavaScript로 동적으로 추가됩니다. -->
+    </div>
+
+    <div class="image-container" id="image-container">
+        <!-- 이미지는 JavaScript로 동적으로 추가됩니다. -->
+    </div>
+
+    <div class="notice-board">
+        <h2>공지사항</h2>
+        <ul id="notice-list">
+            <!-- 공지사항 목록은 JavaScript로 동적으로 추가됩니다. -->
+        </ul>
+    </div>
+</div>
+
+<button class="dark-mode-toggle" onclick="toggleDarkMode()">다크 모드</button>
+
+<script>
+// JavaScript 코드
+document.addEventListener("DOMContentLoaded", function() {
+    // 파일에서 정보 불러오기
+    fetch('ex.txt')
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById('announcement').innerHTML = text;
+        })
+        .catch(error => console.error('Error fetching text:', error));
+
+    // 이미지 불러오기
+    const imageContainer = document.getElementById('image-container');
+    const images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+    let currentIndex = 0;
+
+    function showImage() {
+        imageContainer.innerHTML = `<img src="${images[currentIndex]}" alt="Image ${currentIndex + 1}">`;
+        currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    // 초기 이미지 표시
+    showImage();
+
+    // 5초마다 이미지 변경
+    setInterval(showImage, 5000);
+
+    // 공지사항 추가
+    const notices = [
+        { title: "중요한 안내", content: "이번 주에는 수행평가가 있습니다. 참여해주세요." },
+        { title: "일정 변경", content: "다음 주 월요일에는 시험이 연기되었습니다. 유의하세요." },
+        { title: "새로운 프로젝트", content: "다음 주부터 새로운 프로젝트에 착수합니다. 기대해주세요!" }
+    ];
+
+    const noticeList = document.getElementById('notice-list');
+    notices.forEach(notice => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<h3>${notice.title}</h3><p>${notice.content}</p>`;
+        noticeList.appendChild(listItem);
+    });
+});
+
+function toggleDarkMode() {
+    const body = document.querySelector('body');
+    const container = document.querySelector('.container');
+    body.classList.toggle('dark-mode');
+    container.classList.toggle('dark-mode');
+}
+</script>
+
+</body>
+</html>
