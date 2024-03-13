@@ -9,8 +9,8 @@
 <style>
 /* 공통 CSS 스타일링 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f3f3f3;
     margin: 0;
     padding: 0;
 }
@@ -21,36 +21,7 @@ body {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 20px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    animation: fadeInDown 1s ease-out;
-}
-
-.header h1 {
-    margin: 0;
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.announcement {
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-    animation: fadeIn 1s ease-out;
+    animation: fadeIn 1s ease-out; /* 페이지 로드 시 애니메이션 효과 추가 */
 }
 
 @keyframes fadeIn {
@@ -62,34 +33,38 @@ body {
     }
 }
 
-/* 이미지의 높이를 고정하는 CSS */
+.header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.announcement {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
 .image-container {
     text-align: center;
     margin-top: 20px;
-    height: 400px; /* 이미지의 높이를 원하는 값으로 고정 */
-    overflow: hidden; /* 이미지가 컨테이너를 넘어갈 경우를 대비하여 오버플로우 제어 */
+    height: 400px;
+    overflow: hidden;
+    position: relative; /* 부모 요소로부터의 상대적 위치 설정 */
 }
 
 .image-container img {
     max-width: 100%;
-    height: 100%; /* 이미지의 높이를 컨테이너의 높이에 맞게 조정 */
-    object-fit: cover; /* 이미지가 비율을 유지하면서 컨테이너에 가득 차도록 설정 */
+    height: 100%;
+    object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation: zoomIn 1s ease-out;
-}
-
-.image-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.image-container img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation: zoomIn 1s ease-out;
+    animation: zoomIn 1s ease-out; /* 이미지 로드 시 애니메이션 효과 추가 */
 }
 
 @keyframes zoomIn {
@@ -105,7 +80,6 @@ body {
 
 .notice-board {
     padding: 20px;
-    animation: slideInUp 1s ease-out;
 }
 
 .notice-board h2 {
@@ -123,7 +97,6 @@ body {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
-    animation: fadeInUp 1s ease-out;
 }
 
 .notice-board li:last-child {
@@ -135,45 +108,24 @@ body {
     color: #666;
 }
 
-@keyframes slideInUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 /* 다크 모드 토글 버튼 */
 .dark-mode-toggle {
     position: fixed;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
-    background-color: rgba(3, 105, 214, 0.5); /* 불투명한 버튼 색상 */
+    background-color: rgba(0, 0, 0, 0.7); /* 불투명한 버튼 색상 */
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
     z-index: 1000;
-    transition: rgba(3, 105, 214, 0.5) 0.5s, color 0.5s;
+    opacity: 0.9; /* 불투명도 설정 */
+    transition: opacity 0.5s; /* 투명도 전환 효과 추가 */
 }
 
 .dark-mode-toggle:hover {
-    background-color: rgba(0, 123, 255, 1); /* 버튼에 호버 시 더 뚜렷한 색상 */
+    opacity: 1; /* 호버 시 불투명도를 1로 변경 */
 }
 
 .dark-mode {
@@ -213,11 +165,94 @@ body {
     }
 
     .dark-mode-toggle {
-        top: 10px;
+        bottom: 10px;
         right: 10px;
         padding: 8px 15px;
     }
+
 }
+
+/* 화살표 스타일링 */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    right: 10px;
+}
+
+/* 상세 설명 스타일링 */
+.detail {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    color: #333; /* 텍스트 색상 변경 */
+    background-color: #f9f9f9; /* 배경색 추가 */
+}
+
+/* 링크 스타일링 */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* 다크 모드에서의 링크 색상 */
+.dark-mode a {
+    color: #66b3ff;
+}
+
+/* 다크 모드 시 상세 설명의 배경색과 텍스트 색상 변경 */
+.dark-mode .detail {
+    background-color: #222; /* 다크 모드에서 배경색을 더 어둡게 변경 */
+    color: #fff;
+}
+
+/* 페이지 로드 시 텍스트 애니메이션 효과 */
+.container h1,
+.container h2,
+.container p {
+    animation: fadeInText 1s ease-out;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.countdown-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* 다크 모드에서의 카운트다운 스타일 */
+.dark-mode .countdown-container {
+    background-color: #222; /* 다크 모드에서 배경색을 더 어둡게 변경 */
+    color: #fff; /* 다크 모드에서 텍스트 색상 변경 */
+}
+
 
 </style>
 </head>
@@ -230,65 +265,85 @@ body {
 
     <div class="announcement" id="announcement">
         <!-- 공지사항은 JavaScript로 동적으로 추가됩니다. -->
+        <h2>공지사항</h2>
+        <ul id="notice-list">
+            <li>
+                <h3><a href="#important-info">중요한 안내</a></h3>
+                <p>이번 주에는 수행평가가 있습니다. 참여해주세요.</p>
+            </li>
+            <li>
+                <h3><a href="#schedule-change">일정 변경</a></h3>
+                <p>다음 주 월요일에는 시험이 연기되었습니다. 유의하세요.</p>
+            </li>
+            <li>
+                <h3><a href="#new-project">새로운 프로젝트</a></h3>
+                <p>다음 주부터 새로운 프로젝트에 착수합니다. 기대해주세요!</p>
+            </li>
+        </ul>
     </div>
 
     <div class="image-container" id="image-container">
         <!-- 이미지는 JavaScript로 동적으로 추가됩니다. -->
+        <img src="1.jpg" alt="Image 1">
+        <!-- 좌우 화살표 -->
+        <div class="arrow left" onclick="prevImage()">&#10094;</div>
+        <div class="arrow right" onclick="nextImage()">&#10095;</div>
+    </div>
+
+    <!-- 상세 설명 -->
+    <div id="important-info" class="detail">
+        <h2>중요한 안내</h2>
+        <p>이번 주에는 수행평가가 있습니다. 준비해주세요.</p>
+        <p>1.수학</p>
+        <p>-예제 입니다</p>
+        <p>-예제 입니다</p>
+        <p>-예제 입니다</p>
+        <p>더 자세한 정보는 <a href="#image-container">안내문</a>을 통해 확인할 수 있습니다.</p>
+    </div>
+
+    <div id="schedule-change" class="detail">
+        <h2>일정 변경</h2>
+        <p>다음 주 월요일에는 시험이 연기되었습니다. 유의하세요.</p>
+        <p>더 자세한 정보는 <a href="#image-container">안내문</a>을 통해 확인할 수 있습니다.</p>
+    </div>
+
+    <div id="new-project" class="detail">
+        <h2>새로운 프로젝트</h2>
+        <p>마지막주부터 새로운 <a href="#new-event">프로젝트</a>에 착수합니다. 기대해주세요!</p>
+        <p>더 자세한 정보는 <a href="#image-container">안내문</a>을 통해 확인할 수 있습니다.</p>
+    </div>
+
+    <div id="new-event" class="detail">
+        <h2>모의고사가 얼마 안남았습니다</h2>
+        <p>열심히 공부하셔서 좋은성적 얻으시길바랍니다!</p>
+        <p>더 자세한 정보는 <a href="#countdown">카운트다운</a>에서 확인할 수 있습니다.</p>
+    </div>
+
+    <div id="etc" class="detail">
+        <h2>기타사항⚠️</h2>
+        <p>이 사이트는 아직 완성된것이 아닙니다<div class=""></div></p>
+        <p><mark>당선된다면 사이트는 계속 개선해나갈 예정입니다. 감사합니다.</mark></p>
+        <p>시험까지 남은 <a href="#countdown">기간</a>동안 열심히 공부해서 좋은성적 얻으시길바랍니다.</p>
+        <p>다양한 정보들은 <a href="#announcement">공지</a>에서 확인할 수 있습니다. (문의는 <a href="#mail">이메일</a>을 통해 할수있습니다)</p>
     </div>
 
     <div class="notice-board">
-        <h2>공지사항</h2>
-        <ul id="notice-list">
-            <!-- 공지사항 목록은 JavaScript로 동적으로 추가됩니다. -->
-        </ul>
+        <div id="countdown" class="countdown-container"></div>
+    </div>
+
+    <div id="mail" class="notice-board">
+        이메일 문의: <a class="link" href="mailto:jijunmine@gmail.com">jijunmine@gmail.com</a>
     </div>
 </div>
 
+<!-- 다크 모드 토글 버튼 -->
 <button class="dark-mode-toggle" onclick="toggleDarkMode()">다크 모드</button>
 
 <script>
 // JavaScript 코드
 let darkModeEnabled = false;
-
-document.addEventListener("DOMContentLoaded", function() {
-    // 파일에서 정보 불러오기
-    fetch('ex.txt')
-        .then(response => response.text())
-        .then(text => {
-            document.getElementById('announcement').innerHTML = text;
-        })
-        .catch(error => console.error('Error fetching text:', error));
-
-    // 이미지 불러오기
-    const imageContainer = document.getElementById('image-container');
-    const images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
-    let currentIndex = 0;
-
-    function showImage() {
-        imageContainer.innerHTML = `<img src="${images[currentIndex]}" alt="Image ${currentIndex + 1}">`;
-        currentIndex = (currentIndex + 1) % images.length;
-    }
-
-    // 초기 이미지 표시
-    showImage();
-
-    // 5초마다 이미지 변경
-    setInterval(showImage, 5000);
-
-    // 공지사항 추가
-    const notices = [
-        { title: "중요한 안내", content: "이번 주에는 수행평가가 있습니다. 참여해주세요." },
-        { title: "일정 변경", content: "다음 주 월요일에는 시험이 연기되었습니다. 유의하세요." },
-        { title: "새로운 프로젝트", content: "다음 주부터 새로운 프로젝트에 착수합니다. 기대해주세요!" }
-    ];
-
-    const noticeList = document.getElementById('notice-list');
-    notices.forEach(notice => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<h3>${notice.title}</h3><p>${notice.content}</p>`;
-        noticeList.appendChild(listItem);
-    });
-});
+let currentIndex = 0;
+const images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
 
 function toggleDarkMode() {
     const body = document.querySelector('body');
@@ -298,11 +353,56 @@ function toggleDarkMode() {
     if (darkModeEnabled) {
         body.classList.add('dark-mode');
         container.classList.add('dark-mode');
+        document.querySelectorAll('.detail').forEach(detail => {
+            detail.classList.add('dark-mode');
+        });
     } else {
         body.classList.remove('dark-mode');
         container.classList.remove('dark-mode');
+        document.querySelectorAll('.detail').forEach(detail => {
+            detail.classList.remove('dark-mode');
+        });
     }
 }
+
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage();
+}
+
+function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage();
+}
+
+function showImage() {
+    const imageContainer = document.getElementById('image-container');
+    const image = imageContainer.querySelector('img');
+    image.src = images[currentIndex];
+}
+// 모의고사 날짜 설정 (년, 월은 현재로 고정)
+const mockExamDate = new Date('2024-03-28');
+
+function updateCountdown() {
+    const now = new Date();
+    const timeDifference = mockExamDate - now;
+
+    // 시간, 분, 초 계산
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    // HTML 업데이트
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.innerHTML = `모의고사까지 ${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음`;
+}
+
+// 페이지 로드 시 카운트다운 업데이트 및 매 초마다 업데이트
+updateCountdown();
+setInterval(updateCountdown, 1000);
+// 페이지 로드 시 첫 번째 이미지 표시
+showImage();
 </script>
 
 </body>
